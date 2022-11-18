@@ -19,11 +19,11 @@ class TokenObtainPairSerializer(TokenObtainPairSerializer):
 
         if not self.user.is_active:
             raise AuthenticationFailed({
-                'detail': f"Пользователь {self.user.username} был деактивирован!"
+                'detail': f"Пользователь {self.user.email} был деактивирован!"
             }, code='user_deleted')
 
         data['id'] = self.user.id
-        data['username'] = self.user.username
+        data['email'] = self.user.email
 
         return data
 
@@ -44,11 +44,11 @@ class TokenRefreshSerializer(TokenRefreshSerializer):
 
         if not user.is_active:
             raise AuthenticationFailed({
-                'detail': f"Пользователь {user.username} был архивирован!"
+                'detail': f"Пользователь {user.email} был архивирован!"
             }, code='user_deleted')
 
         data['id'] = user.id
-        data['username'] = user.username
+        data['email'] = user.email
 
         access = AccessToken(data['access'])
 
@@ -79,10 +79,11 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id','username','password','name','surname')
+        fields = ('id','email','password','name','surname','is_active')
         extra_kwargs={
             'name':{'required':False},
-            'surname':{'required':False}
+            'surname':{'required':False},
+            'is_active':{'required':False}
         }
 
     def save(self):

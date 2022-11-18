@@ -14,19 +14,19 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     id = models.AutoField(primary_key=True)
-    username = models.EmailField('email', max_length=50, default='', unique=True)
+    email = models.EmailField('email', max_length=50, default='', unique=True)
 
     name=models.CharField('Имя',max_length=255,default='',null=True,blank=True)
     surname=models.CharField('Фамилия',max_length=255,default='',null=True,blank=True)
 
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(
-        default=True,
+        default=False,
         choices=IS_ACTIVE,
         verbose_name='Статус доступа',
     )
 
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     class Meta:
@@ -34,5 +34,5 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = 'Пользователи'
 
     def __str__(self):
-        return str(self.username)
+        return str(self.email)
 # Create your models here.
