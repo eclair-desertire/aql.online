@@ -204,8 +204,8 @@ DEFAULT_FROM_EMAIL='alish.dev01@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.yandex.kz'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = 'alisher.r@elefanto.kz'
-EMAIL_HOST_PASSWORD='Behappy7+'
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=env('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 
 
