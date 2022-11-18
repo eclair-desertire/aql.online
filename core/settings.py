@@ -35,6 +35,7 @@ DEBUG = env('DEBUG')
 ALLOWED_HOSTS = ['*']
 
 DJANGO_APPS=[
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
