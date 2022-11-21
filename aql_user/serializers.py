@@ -79,11 +79,12 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id','email','password','name','surname','is_active')
+        fields = ('id','email','password','name','surname','is_active','is_email_confirmed')
         extra_kwargs={
             'name':{'required':False},
             'surname':{'required':False},
-            'is_active':{'required':False}
+            'is_active':{'required':False},
+            'is_email_confirmed':{'required':False},
         }
 
     def save(self):
@@ -92,3 +93,14 @@ class UserSerializer(serializers.ModelSerializer):
             self.validated_data['password'] = make_password(password)
 
         return super().save()
+
+    def password_save(self,new_password):
+        self.validated_data['password']=make_password(new_password)
+
+        return super().save()
+
+
+class PasswordSerializer(serializers.Serializer):
+    old_password=serializers.CharField()
+    old_password_confirm=serializers.CharField()
+    new_password=serializers.CharField()

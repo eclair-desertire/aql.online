@@ -21,9 +21,13 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(
-        default=False,
+        default=True,
         choices=IS_ACTIVE,
         verbose_name='Статус доступа',
+    )
+    is_email_confirmed=models.BooleanField(
+        default=False,
+        verbose_name="Почта подтверждена"
     )
 
     USERNAME_FIELD = 'email'
