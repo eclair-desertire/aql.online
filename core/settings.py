@@ -55,6 +55,7 @@ THIRD_PARTY_APPS=[
 
 LOCAL_APPS=[
     'aql_user',
+    'courses',
 ]
 
 # Application definition

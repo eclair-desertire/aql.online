@@ -23,7 +23,8 @@ from django_email_verification import urls as email_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('api/v1/',include('aql_user.urls')),
+    path('api/v1/users/',include('aql_user.urls')),
+    path('api/v1/courses/',include('courses.urls')),
 
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
