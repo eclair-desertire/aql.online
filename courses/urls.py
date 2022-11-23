@@ -2,5 +2,6 @@ from django.urls import path
 from courses.views import courses
 
 urlpatterns=[
-    path('course_list/',courses.CourseList.as_view())
+    path('course_list/',courses.CourseList.as_view({'get':'list'})),
+    path('course/<int:pk>/',courses.CourseList.as_view({'get':'retrieve'})),
 ]

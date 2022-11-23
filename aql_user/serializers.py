@@ -79,12 +79,13 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id','email','password','name','surname','is_active','is_email_confirmed')
+        fields = ('id','email','password','role','name','surname','is_active','is_email_confirmed')
         extra_kwargs={
             'name':{'required':False},
             'surname':{'required':False},
             'is_active':{'required':False},
             'is_email_confirmed':{'required':False},
+            'role':{'required':False}
         }
 
     def save(self):

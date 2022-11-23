@@ -89,6 +89,8 @@ class EmailConfirm(ModelViewSet):
 
 
 class VerifyEmail(generics.GenericAPIView):
+    serializer_class=None
+
     def get(self,request):
         token=request.GET.get('token')
         try:
