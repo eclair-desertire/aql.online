@@ -9,7 +9,7 @@ from rest_framework import status, generics
 from drf_spectacular.utils import extend_schema
 from aql_user.models import User
 from rest_framework.viewsets import ModelViewSet
-from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
+from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.contrib.sites.shortcuts import get_current_site
@@ -135,7 +135,7 @@ class ResetPassword(ModelViewSet):
         )
         return Response(serializer.data,status=status.HTTP_200_OK)
 
-class UpdatePassword(generics.GenericAPIView):
+class UpdatePassword(ModelViewSet):
     permission_classes=[IsAuthenticated,]
     queryset=User.objects.all()
     serializer_class=serializers.PasswordSerializer

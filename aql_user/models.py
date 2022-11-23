@@ -3,10 +3,25 @@ from django.contrib.auth.models import (
     AbstractBaseUser, PermissionsMixin
 )
 from .managers import UserManager
+from django.utils.translation import gettext as _
 
 class User(AbstractBaseUser, PermissionsMixin):
+
+    SUPERADMIN, COURSEOWNER, REGULAR = range(1,4)
     
     objects = UserManager()
+
+    ROLE_GROUP={
+        SUPERADMIN:1,
+        COURSEOWNER:2,
+        REGULAR:3,
+    }
+
+    ROLE_TYPES={
+        (SUPERADMIN, _('SUPERADMIN')),
+        (COURSEOWNER, _('COURSEOWNER')),
+        (REGULAR, _('REGULAR')),
+    }
 
     IS_ACTIVE = (
         (True, 'Не заблокирован'),
@@ -14,8 +29,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     id = models.AutoField(primary_key=True)
+    image=models.FileField('Аватар',upload_to='media/users/avatar/',null=True, blank=True)
     email = models.EmailField('email', max_length=50, default='', unique=True)
-
+    role=models.IntegerField('Роль',choices=ROLE_TYPES,default=REGULAR)
     name=models.CharField('Имя',max_length=255,default='',null=True,blank=True)
     surname=models.CharField('Фамилия',max_length=255,default='',null=True,blank=True)
 
@@ -38,5 +54,5 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = 'Пользователи'
 
     def __str__(self):
-        return str(self.email)
+        return str(self.email)+" - "+str(self.role)
 # Create your models here.
