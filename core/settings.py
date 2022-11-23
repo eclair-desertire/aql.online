@@ -217,9 +217,9 @@ JAZZMIN_SETTINGS = {
     "site_icon": "images/favicon.png",
     # Add your own branding here
     "site_logo": None,
-    "welcome_sign": "Welcome to the your_site_name",
+    "welcome_sign": "Welcome to the AQL Online",
     # Copyright on the footer
-    "copyright": "your_site_name",
+    "copyright": "AQL Online",
     "user_avatar": None,
     ############
     # Top Menu #

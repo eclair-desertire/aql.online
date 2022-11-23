@@ -28,6 +28,10 @@ class CourseVideoSerializer(serializers.ModelSerializer):
         model=CourseVideos
         fields=('module','image','title','description',
         'materials','video','comments','video_progress',)
+        extra_kwargs={
+            'comments':{'required':False},
+            'video_progress':{'required':False},
+        }
 
 
 class CourseSerializer(serializers.ModelSerializer):
