@@ -55,7 +55,7 @@ class RegisterUserView(ModelViewSet):
         return super().create(request, *args, **kwargs)
 
 class EmailConfirm(ModelViewSet):
-    permission_classes=[IsAuthenticated,]
+    permission_classes=[AllowAny,]
     queryset=User.objects.all()
     serializer_class=serializers.UserSerializer
 
@@ -162,7 +162,7 @@ class UpdatePassword(ModelViewSet):
 
 
 class SelfView(ModelViewSet):
-    permission_classes=[AllowAny,]
+    permission_classes=[IsAuthenticated,]
     queryset=User.objects.all()
     serializer_class=serializers.UserSerializer
 

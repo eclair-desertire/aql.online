@@ -4,8 +4,11 @@ from rest_framework.viewsets import ModelViewSet
 from drf_spectacular.utils import extend_schema
 from courses import serializers
 from courses.models import Course, CourseVideos
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from aql_user.permissions import IsSuperAdmin,IsCourseOwner,IsRegular
 
 class CourseList(ModelViewSet):
+    permission_classes=[AllowAny,]
     serializer_class=serializers.CourseListSerializer
     queryset=Course.objects.all()
 
@@ -28,7 +31,13 @@ class CourseList(ModelViewSet):
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
     
-
+class CourseOwnerView(ModelViewSet):
+    permission_classes=[
+        IsAuthenticated,
+        IsCourseOwner
+    ]
+    serializer_class=serializers.CourseListSerializer
+    queryset=Course.objects.all()
     @extend_schema(
         request=serializer_class,
         responses={200: serializer_class},
@@ -58,7 +67,8 @@ class CourseList(ModelViewSet):
         return super().destroy(request, *args, **kwargs)
 
 
-class Video(ModelViewSet):
+class VideoView(ModelViewSet):
+    permission_classes=[IsAuthenticated]
     serializer_class=serializers.CourseVideoSerializer
     queryset=CourseVideos.objects.all()
 
