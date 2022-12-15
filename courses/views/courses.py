@@ -119,3 +119,6 @@ class VideoView(ModelViewSet):
     )
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
+
+class UserComments(ModelViewSet):
+    pass
